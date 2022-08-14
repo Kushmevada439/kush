@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        var $FNameLNameMNameRegEx = /^([a-zA-Z]{2,20})$/;
+        var $FullNameMNameRegEx = /^([a-zA-Z ]{2,40})$/;
+        var $BankAccountNameRegEx = /^([a-zA-Z ]{2,60})$/;
+        var $PasswordRegEx = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,12}$/;
+        var $EmailIdRegEx = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,8}\b$/i;
+        var $ConNoRegEx = /^([0-9]{10})$/;
+        var $AgeRegEx = /^([0-9]{1,2})$/;
+        var $AadhaarNoRegEx = /^([0-9]{12})$/;
+        var $GSTNoRegEx = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
+        var $IndianDrivingLicenseNoRegEx = /^([A-Z]{2,3}[-/0-9]{8,13})$/;
+        var $IndianVehicleRegNoRegEx = /^([A-Z]{2}[0-9]{1,2}[A-Z]{1,3}[0-9]{1,4})$/;
+        var $PincodeRegEx = /^[1-9][0-9]{5,6}$/;
+        var $PANNoRegEx = /^[A-Z]{3}[ABCFGHLJPT][A-Z][0-9]{4}[A-Z]$/;
+        var $IFSCCodeRegEx = /^[A-Za-z]{4}0[A-Z0-9a-z]{6}$/;
+        var $BankAccountNoRegEx = /^([0-9]{9,18})$/;
+        var $PostTitleRegex = /^(.{30,300})$/;
+        var $PostDescRegex = /^(.{100,3000})$/;
+        var $LatitudeLongitude = /^(-?(?:1[0-7]|[1-9])?\d(?:\.\d{1,8})?|180(?:\.0{1,8})?)$/;
+        
+        $(document).ready(function () {
+            $("#FN").blur(function () {
+                $("#FV").empty();
+                if ($(this).val() == "" || $(this).val() == null) {
+                    $("#FV").html("&#9757;" + "First Name required..!!");
+                }
+                else {
+                    if (!$(this).val().match($FNameLNameMNameRegEx)) {
+                        $("#FV").html("&#9757;" + "Invalid First Name..!!");
+                    }
+                }
+            });
+            $("#FN").keypress(function (e) {
+                var flag = false;
+                $("#FV").empty();
+                ((e.which >= 65 && e.which <= 90) || (e.which >= 97 && e.which <= 122))
+                    ? flag = true
+                    : (flag = false, $("#FV").html("&#9757;" + "Invalid keypress..!!"))
+                return flag;
+            });
+            $("#MDN").blur(function () {
+                $("#MDV").empty();
+                if ($(this).val() == "" || $(this).val() == null) {
+                    $("#MDV").html("&#9757;" + "Middle Name required..!!");
+                }
+                else {
+                    if (!$(this).val().match($FNameLNameMNameRegEx)) {
+                        $("#MDV").html("&#9757;" + "Invalid Middle Name..!!");
+                    }
+                }
+            });
+            $("#MDN").keypress(function (e) {
+                var flag = false;
+                $("#MDV").empty();
+                ((e.which >= 65 && e.which <= 90) || (e.which >= 97 && e.which <= 122))
+                    ? flag = true
+                    : (flag = false, $("#MDV").html("&#9757;" + "Invalid keypress..!!"))
+                return flag;
+            });
+            $("#LN").blur(function () {
+                $("#LV").empty();
+                if ($(this).val() == "" || $(this).val() == null) {
+                    $("#LV").html("&#9757;" + "Last Name required..!!");
+                }
+                else {
+                    if (!$(this).val().match($FNameLNameMNameRegEx)) {
+                        $("#LV").html("&#9757;" + "Invalid Last Name..!!");
+                    }
+                }
+            });
+            $("#LN").keypress(function (e) {
+                var flag = false;
+                $("#LV").empty();
+                ((e.which >= 65 && e.which <= 90) || (e.which >= 97 && e.which <= 122))
+                    ? flag = true
+                    : (flag = false, $("#LV").html("&#9757;" + "Invalid keypress..!!"))
+                return flag;
+            });
+            $("#PW").blur(function () {
+                $("#PWV").empty();
+                if ($(this).val() == "" || $(this).val() == null) {
+                    $("#PWV").html("&#9757;" + "Password required..!!");
+                }
+                else {
+                    if (!$(this).val().match($PasswordRegEx)) {
+                        $("#PWV").html("&#9757;" + "Invalid Password..!!");
+                    }
+                }
+            });
+            $("#PWr").blur(function () {
+                $("#PWVr").empty();
+                if ($(this).val() == "" || $(this).val() == null) {
+                }
+                else {
+                    if (!$(this).val().match($PasswordRegEx)) {
+                        $("#PWVr").html("&#9757;" + "does not match Password..!!");
+                    }
+                }
+            });
+            $("#PC").blur(function () {
+                $("#PCV").empty();
+                if ($(this).val() == "" || $(this).val() == null) {
+                    $("#PCV").html("&#9757;" + "Pin No. required..!!");
+                }
+                else {
+                    if (!$(this).val().match($PincodeRegEx)) {
+                        $("#PCV").html("&#9757;" + "Invalid Pin No..!!");
+                    }
+                }
+            });
+            $("#PH").keypress(function (e) {
+                var flag = false;
+                $("#PHV").empty();
+                (e.which >= 48 && e.which <= 57)
+                    ? flag = true
+                    : (flag = false, $("#PHV").html("&#9757;" + "Invalid keypress..!!"))
+                return flag;
+            })
+            $("#PH").blur(function () {
+                $("#PHV").empty();
+                if ($(this).val() == "" || $(this).val() == null) {
+                    $("#PHV").html("&#9757;" + "Phone Number required..!!");
+                }
+                else {
+                    if (!$(this).val().match($ConNoRegEx)) {
+                        $("#PHV").html("&#9757;" + "Invalid Phone Number..!!");
+                    }
+                }
+            });
+            $("#Em").blur(function () {
+                $("#Ev").empty();
+                if ($(this).val() == "" || $(this).val() == null) {
+                    $("#Ev").html("&#9757;" + "Email id required..!!");
+                }
+                else {
+                    if (!$(this).val().match($EmailIdRegEx)) {
+                        $("#Ev").html("&#9757;" + "Invalid email id..!!");
+                    }
+                }
+            });
+            $("#AgeRangeSlider").slider({
+                orientation:"horizontal",
+                min: 18,
+                max: 100,
+                value: 18,
+                slide: function(event ,ui){
+                    $("#AgeValue").val(ui.value);
+                }
+              });
+              $("#AgeValue").val($("AgeRangeSlider").slider("value"));
+        });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: #fec107;
+            padding: 0 10px;
+        }
+
+        .wrapper {
+            width: 80%;
+            background: #fff;
+            margin: 50px auto;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.125);
+            padding: 30px;
+        }
+
+        .wrapper .title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #fec107;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .wrapper .form {
+            width: 100%;
+        }
+
+
+        .wrapper .form .inputfield label {
+            width: 200px;
+            color: #757575;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .wrapper .form .inputfield .input,
+        .wrapper .form .inputfield .textarea {
+            width: 100%;
+            outline: none;
+            border: 1px solid #d5dbd9;
+            font-size: 15px;
+            padding: 8px 10px;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .wrapper .form .inputfield .textarea {
+            width: 100%;
+            height: 125px;
+            resize: none;
+        }
+
+        .wrapper .form .inputfield .custom_select {
+            position: relative;
+            width: 100%;
+            height: 37px;
+        }
+
+        .wrapper .form .inputfield .custom_select:before {
+            content: "";
+            position: absolute;
+            top: 12px;
+            right: 10px;
+            border: 8px solid;
+            border-color: #d5dbd9 transparent transparent transparent;
+            pointer-events: none;
+        }
+
+        .wrapper .form .inputfield .custom_select select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            outline: none;
+            width: 100%;
+            height: 100%;
+            border: 0px;
+            padding: 8px 10px;
+            font-size: 15px;
+            border: 1px solid #d5dbd9;
+            border-radius: 3px;
+        }
+
+
+        .wrapper .form .inputfield .input:focus,
+        .wrapper .form .inputfield .textarea:focus,
+        .wrapper .form .inputfield .custom_select select:focus {
+            border: 1px solid #fec107;
+        }
+
+        .wrapper .form .inputfield p {
+            font-size: 14px;
+            color: #757575;
+        }
+
+        .wrapper .form .inputfield .check {
+            width: 15px;
+            height: 15px;
+            position: relative;
+            display: block;
+            cursor: pointer;
+        }
+
+        .wrapper .form .inputfield .check input[type="checkbox"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+
+        .wrapper .form .inputfield .check .checkmark {
+            width: 15px;
+            height: 15px;
+            border: 1px solid #fec107;
+            display: block;
+            position: relative;
+        }
+
+        .wrapper .form .inputfield .check .checkmark:before {
+            content: "";
+            position: absolute;
+            top: 1px;
+            left: 2px;
+            width: 5px;
+            height: 2px;
+            border: 2px solid;
+            border-color: transparent transparent #fff #fff;
+            transform: rotate(-45deg);
+            display: none;
+        }
+
+        .wrapper .form .inputfield .check input[type="checkbox"]:checked~.checkmark {
+            background: #fec107;
+        }
+
+        .wrapper .form .inputfield .check input[type="checkbox"]:checked~.checkmark:before {
+            display: block;
+        }
+
+        .wrapper .form .inputfield .btn {
+            width: 100%;
+            padding: 8px 10px;
+            font-size: 15px;
+            border: 0px;
+            background: #fec107;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .wrapper .form .inputfield .btn:hover {
+            background: #ffd658;
+        }
+
+        .wrapper .form .inputfield:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width:420px) {
+            .wrapper .form .inputfield {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .wrapper .form .inputfield label {
+                margin-bottom: 5px;
+            }
+
+            .wrapper .form .inputfield.terms {
+                flex-direction: row;
+            }
+        }
+        #AgeValue
+        {
+            width:40px;
+            height:30px;
+            font-size:large;
+            font-weight:bold;
+            color:Red;
+        }
+        #AgeRangeSlider
+        {
+            width:300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="title">
+            Registration Form
+        </div>
+        <div class="form">
+            <div class="inputfield">
+                <label>First Name</label>
+                <input type="text" class="input" id="FN">
+                <small id="FV"></small>
+            </div>
+            <div class="inputfield">
+                <label>Middle Name</label>
+                <input type="text" class="input" id="MDN">
+                <small id="MDV"></small>
+            </div>
+            <div class="inputfield">
+                <label>Last Name</label>
+                <input type="text" class="input" id="LN">
+                <small id="LV"></small>
+            </div>
+            <div class="inputfield">
+                <label>SELECT BIRTH DATE</label>
+                <input type="text" class="input" id="DATE">
+            </div>
+            <div class="inputfield">
+                <label>Password</label>
+                <input type="password" class="input" id="PW">
+                <small id="PWV"></small>
+            </div>
+            <div class="inputfield">
+                <label>Confirm Password</label>
+                <input type="password" class="input" id="PWr">
+                <small id="PWVr"></small>
+            </div>
+            <div class="inputfield">
+                <label>Gender</label>
+                <div class="custom_select">
+                    <select>
+                        <option value="">Select</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+            </div>
+                <label for="AgeValue"> Enter your Age:</label>
+            <input type="text" id="AgeValue" disabled="true" />
+               <div id="AgeRangeSlider"></div>
+            <div class="inputfield">
+                <label>Email Address</label>
+                <input type="text" class="input" id="Em">
+                <small id="Ev"></small>
+            </div>
+            <div class="inputfield">
+                <label>Phone Number</label>
+                <input type="text" class="input" id="PH">
+                <small id="PHV"></small>
+            </div>
+            <div class="inputfield">
+                <label>Address</label>
+                <textarea class="textarea"></textarea>
+            </div>
+            <div class="inputfield">
+                <label>PIN CODE</label>
+                <input type="text" class="input" id="PC">
+                <small id="PCV"></small>
+            </div>
+        </div>
+        <div class="inputfield">
+            <input type="button" value="Register" id="Btn">
+        </div>
+    </div>
+    </div>
+</body>
+</html>
